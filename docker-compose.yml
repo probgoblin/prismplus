@@ -1,0 +1,26 @@
+# Why version 3? I don't know. It works. You could do 3.2 if you want, or
+# 3.7 if you're a freak. But ask yourself, are you truly freak enough to
+# change this value for no reason?
+version: '3'
+services:
+  prismplus:
+    image: probgoblin/prismplus:latest
+    restart: unless-stopped
+# There is a good chance you will have this behind a reverse proxy, so
+# if you need to specify which network you want it to live on, here you go:
+    #networks:
+# Gentle reminder that if you are running something that splits RTMP streams
+# you are probably already running an RTMP server somewhere. If it's on same host
+# as this container, make sure they don't wind up fighting for the host's 1935
+# port like rabid dogs/catboi streamers.
+    ports:
+      - "5383:5383"
+      - "1935:1935"
+# Replace the value of adminKey with whatever you want to secure the
+# webUI with. Now you no longer have to keep track of what it generates
+# each time. Just don't use the one below. That one is mine, do not steal.  
+    command: --adminKey=abcd-efghijkl-mnop
+# Again, if you have a reverse proxy in the mix, you probably have at least
+# one external network kicking around, so define it below. Or don't, no one
+# is going to read this. Put whatever you want down there, computers aren't real.
+#networks:

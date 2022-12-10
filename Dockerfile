@@ -27,4 +27,8 @@ COPY --from=backend /go/src/github.com/geekgonecrazy/prismplus/prismplus /app/pr
 EXPOSE 5383
 EXPOSE 1935
 
-CMD ["/app/prismplus"]
+# Switching from CMD to ENTRYPOINT makes it easier for us to pass the desired
+# AdminKey in our Compose file
+# Normally I'd have a bunch of wacky comments in here but this was all I needed
+# to do. Just pretend I made a knock knock joke or something similar.
+ENTRYPOINT [ "/app/prismplus" ]
